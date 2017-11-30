@@ -14,4 +14,22 @@ Based on [lingua-translit](https://www.netzum-sorglos.de/software/lingua-transli
 docker-compose up --build
 ```
 
-It should transliterate German text (few letters) from `input.txt` file and output results to console
+It will start a HTTP server listening to port 3000
+
+## Getting list of all possible transliterations
+
+```
+GET http://localhost:3000/options
+```
+
+## Transliterate
+
+```
+GET http://localhost:3000?option=Common DEU&text=ä ö ü
+```
+
+Output will be
+
+```
+ae oe ue
+```

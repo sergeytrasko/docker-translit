@@ -1,10 +1,17 @@
-FROM alpine:3.6
+FROM node:9.2.0-alpine
 
 RUN apk update && \
     apk add perl perl-lingua-translit
 
 ADD input.txt /tmp
 
-RUN translit -t "Common DEU" -i /tmp/input.txt
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+ADD package.json .
 
-CMD /bin/sh
+RUN npm install
+
+ADD server.js .
+ADD app app
+
+CMD ["node", "server"]
